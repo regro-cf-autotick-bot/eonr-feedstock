@@ -10,21 +10,23 @@ source:
   sha256: 80c31afdbbe1c0ea5579180ebb1b6cd12f6f0f3930a1d1db016810899aaa013c
 
 build:
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
   noarch: python
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
   run:
-    - python
+    - python >={{ python_min }}
     - scikits-bootstrap
     - seaborn
     - uncertainties
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - eonr
 
